@@ -1,0 +1,6 @@
+=======================================================================
+=                       lu_vim-tmux-terminal                          =
+=======================================================================
+
+This package is designed to offer a general purpose terminal link in tmux
+to use together with vim editors.
