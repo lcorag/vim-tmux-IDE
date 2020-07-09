@@ -34,10 +34,11 @@ function! Send_tmux(tmux_session, code)
    if (g:tmux_session == 'notset')
       echo "No Tmux Session linked: start one with <Localleader>rf"
    else
-      let code = split(a:code, "\n")
-      for line in code
-         silent execute '! tmux send-keys -t ' . a:tmux_session . ' "' . line . '" Enter'
-      endfor
+      " silent execute "redir! > /tmp/tmux_vim_buffer | echon a:code | echon '\n' | redir END"
+      silent execute "redir! > /tmp/tmux_vim_buffer | echon a:code | redir END"
+      " silent execute "! sed '/^$/d' /tmp/tmux_vim_buffer | tmux load-buffer - && tmux paste-buffer -t  " . a:tmux_session . " && tmux delete-buffer"
+      silent execute "! tmux load-buffer /tmp/tmux_vim_buffer && tmux paste-buffer -t  " . a:tmux_session . " && tmux delete-buffer"
+      " silent execute '! rm /tmp/tmux_vim_buffer'
       redraw!
    endif
 endfunction

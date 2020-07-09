@@ -18,12 +18,19 @@ nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 
 " Send lines
 nnoremap <Localleader>l yy:call Send_tmux(g:tmux_session, @")<CR>
-nnoremap <Localleader>d yyj:call Send_tmux(g:tmux_session, @")<CR>
+nnoremap <Localleader>d yy:call Send_tmux(g:tmux_session, @")<CR>j
+
+" Send lines trimming white space from left
+nnoremap <Localleader>k 0wy$:call Send_tmux(g:tmux_session, @" . "\n")<CR>
+nnoremap <Localleader>s 0wy$:call Send_tmux(g:tmux_session, @" . "\n")<CR>j
 
 " Send paragraphs
-nnoremap <Localleader>pe {jy}``:call Send_tmux(g:tmux_session, @")<CR>
-nnoremap <Localleader>pa }{jy}}:call Send_tmux(g:tmux_session, @")<CR>
+nnoremap <Localleader>pe {y}:call Send_tmux(g:tmux_session, @")<CR>``
+nnoremap <Localleader>pa }{y}:call Send_tmux(g:tmux_session, @")<CR>}}{
+
+" Send everything
+nnoremap <Localleader>aa :%y<CR>:call Send_tmux(g:tmux_session, @")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y`<:call Send_tmux(g:tmux_session, @")<CR>
-vnoremap <Localleader>sa y`>:call Send_tmux(g:tmux_session, @")<CR>
+vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n")<CR>`>
