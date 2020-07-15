@@ -12,12 +12,7 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 " Mappings
 "######################################################################
 " Spawn Tmux
-if system("type bpython > /dev/null && echo '1'")
-   nnoremap <Localleader>rf :call Spawn_tmux("bpython")<CR>
-else
-   nnoremap <Localleader>rf :call Spawn_tmux("python")<CR>
-endif
-
+nnoremap <Localleader>rf :call Spawn_tmux("R")<CR>
 " Kill Tmux
 nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 
@@ -39,3 +34,6 @@ nnoremap <Localleader>aa :%y<CR>:call Send_tmux(g:tmux_session, @")<CR>
 " Send Selections
 vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n")<CR>`<
 vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n")<CR>`>
+
+" Remap = to <-
+inoremap ò <-
