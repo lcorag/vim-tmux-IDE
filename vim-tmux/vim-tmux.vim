@@ -5,12 +5,12 @@ let g:tmux_session = "notset"
 function! Spawn_tmux(filetype)
    silent let isthere = system("tmux list-sessions 2&> /dev/null | grep " . g:tmux_session . " | wc -l")
    if isthere
-      echom "Tmux session already enstablished.\nSession: " . g:tmux_session
+      echom "Tmux session already established.\nSession: " . g:tmux_session
    else
       " create a random number for session naming
       silent let randnum = system("echo -n $RANDOM")
       " Spawn tmux session
-      silent execute '!' . g:TERMINAL . ' ' . $SHELL . ' -c "tmux new-session -s ' . randnum . ' ' . a:filetype . '" & disown'
+      silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" & disown'
       let g:tmux_session = randnum
       augroup vim_tmux
          au!
