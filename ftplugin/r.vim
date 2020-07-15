@@ -12,7 +12,12 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 " Mappings
 "######################################################################
 " Spawn Tmux
-nnoremap <Localleader>rf :call Spawn_tmux("R")<CR>
+if system("type radian > /dev/null && echo '1'")
+   nnoremap <Localleader>rf :call Spawn_tmux("radian")<CR>
+else
+   nnoremap <Localleader>rf :call Spawn_tmux("R")<CR>
+endif
+
 " Kill Tmux
 nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 
