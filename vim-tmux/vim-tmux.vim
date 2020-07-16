@@ -28,17 +28,41 @@ function! Kill_tmux(tmux_session)
       let g:tmux_session = "notset"
    endif
 endfunction
+
+" Prepare Code to send
+" Used to write code buffer
+function! CodePrepare(code, lang)
+   silent execute "redir! > /tmp/tmux_vim_buffer | echon a:code | redir END"
+   if (a:lang == 'r')
+      silent call CodeClean_r()
+   endif
+endfunction
       
+" Code Specific Manipulation
+function! CodeClean_r()
+   " Trim white spaces (not needed by R)
+   silent execute '! sed -i "s/^\s*//g;s/\s*$//g" /tmp/tmux_vim_buffer'
+endfunction
+
 " Functions to send command
-function! Send_tmux(tmux_session, code)
+function! Send_tmux(tmux_session, code, lang)
    if (g:tmux_session == 'notset')
       echo "No Tmux Session linked: start one with <Localleader>rf"
    else
-      " silent execute "redir! > /tmp/tmux_vim_buffer | echon a:code | echon '\n' | redir END"
-      silent execute "redir! > /tmp/tmux_vim_buffer | echon a:code | redir END"
-      " silent execute "! sed '/^$/d' /tmp/tmux_vim_buffer | tmux load-buffer - && tmux paste-buffer -t  " . a:tmux_session . " && tmux delete-buffer"
+      call CodePrepare(a:code, a:lang)
       silent execute "! tmux load-buffer /tmp/tmux_vim_buffer && tmux paste-buffer -t  " . a:tmux_session . " && tmux delete-buffer"
       " silent execute '! rm /tmp/tmux_vim_buffer'
+      redraw!
+   endif
+endfunction
+
+" Send command wrapped (language specific, using function lu_vim_tmux_wrapper)
+function! Send_tmux_wrapped(tmux_session, code, lang)
+   if (g:tmux_session == 'notset')
+      echo "No Tmux Session linked: start one with <Localleader>rf"
+   else
+      call CodePrepare(a:code, a:lang)
+      execute "! tmux send-keys -t " . a:tmux_session . " 'lu_vim_tmux_wrapper()' Enter"
       redraw!
    endif
 endfunction

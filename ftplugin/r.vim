@@ -9,36 +9,45 @@ let g:did_VimTmuxTerminal = 1
 execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 
 "######################################################################
+" Function to initialize R
+"######################################################################
+function! Init_r(init_file)
+   if system("type radian > /dev/null && echo '1'")
+      call Spawn_tmux("radian")
+   else
+      call Spawn_tmux("R")
+   endif
+   sleep
+   call Send_tmux(g:tmux_session, "source('" . a:init_file . "')\n", "r")
+   redraw!
+endfunction
+
+
+
+"######################################################################
 " Mappings
 "######################################################################
 " Spawn Tmux
-if system("type radian > /dev/null && echo '1'")
-   nnoremap <Localleader>rf :call Spawn_tmux("radian")<CR>
-else
-   nnoremap <Localleader>rf :call Spawn_tmux("R")<CR>
-endif
+let __init_file_r = expand("<sfile>:h:h") . '/vim-tmux/init_r.R'
+nnoremap <Localleader>rf :call Init_r(__init_file_r)<CR>
 
 " Kill Tmux
 nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 
 " Send lines
-nnoremap <Localleader>l yy:call Send_tmux(g:tmux_session, @")<CR>
-nnoremap <Localleader>d yy:call Send_tmux(g:tmux_session, @")<CR>j
-
-" Send lines trimming white space from left
-nnoremap <Localleader>k 0wy$:call Send_tmux(g:tmux_session, @" . "\n")<CR>
-nnoremap <Localleader>s 0wy$:call Send_tmux(g:tmux_session, @" . "\n")<CR>j
+nnoremap <Localleader>l yy:call Send_tmux(g:tmux_session, @", "r")<CR>
+nnoremap <Localleader>d yy:call Send_tmux(g:tmux_session, @", "r")<CR>j
 
 " Send paragraphs
-nnoremap <Localleader>pe {y}:call Send_tmux(g:tmux_session, @")<CR>``
-nnoremap <Localleader>pa }{y}:call Send_tmux(g:tmux_session, @")<CR>}}{
+nnoremap <Localleader>pe {y}:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR>``
+nnoremap <Localleader>pa }{y}:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR>}}{
 
 " Send everything
-nnoremap <Localleader>aa :%y<CR>:call Send_tmux(g:tmux_session, @")<CR>
+nnoremap <Localleader>aa :%y<CR>:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n")<CR>`<
-vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n")<CR>`>
+vnoremap <Localleader>se y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`>
 
 " Remap = to <-
-inoremap ò <-
+inoremap ò <Space><-<Space>
