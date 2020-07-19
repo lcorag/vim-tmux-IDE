@@ -46,8 +46,11 @@ nnoremap <Localleader>pa }{y}:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR
 nnoremap <Localleader>aa :%y<CR>:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`<
-vnoremap <Localleader>sa y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`>
+vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "r")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "r")<CR>`>
+" Send Selection Hiding the code
+vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`<
+vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`>
 
 " Remap = to <-
 inoremap ò <Space><-<Space>

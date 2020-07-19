@@ -62,7 +62,24 @@ function! Send_tmux_wrapped(tmux_session, code, lang)
       echo "No Tmux Session linked: start one with <Localleader>rf"
    else
       call CodePrepare(a:code, a:lang)
-      execute "! tmux send-keys -t " . a:tmux_session . " 'lu_vim_tmux_wrapper()' Enter"
+      silent execute "! tmux send-keys -t " . a:tmux_session . " 'lu_vim_tmux_wrapper()' Enter"
+      redraw!
+   endif
+endfunction
+
+" Compile current file (for fortran)
+function! Compile_tmux(tmux_session, fname, flags)
+   if (g:tmux_session == 'notset')
+      echo "No Tmux Session linked: start one with <Localleader>rf"
+   else
+      if (a:flags=="default")
+         let flags = "-g -Wall -O2 -mtune=native"
+      endif
+      if (a:fname=="default")
+         let fname = expand("%:p")
+      endif
+      let instruct = "gfortran " . flags . " " . fname
+      silent execute "! tmux send-keys -t " . a:tmux_session . ' "' . instruct . '" Enter'
       redraw!
    endif
 endfunction
