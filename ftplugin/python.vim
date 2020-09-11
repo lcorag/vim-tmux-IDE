@@ -8,15 +8,28 @@ let g:did_VimTmuxTerminal = 1
 " Source common functions
 execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 
+
+"######################################################################
+" Function to initialize Python
+"######################################################################
+function! Init_py(init_file)
+   if system("type bpython > /dev/null && echo '1'")
+      call Spawn_tmux("bpython")
+   else
+      call Spawn_tmux("python")
+   endif
+   sleep
+   call Send_tmux(g:tmux_session, "exec(open('" . a:init_file . "').read())\n", "py")
+   redraw!
+endfunction
+
+
 "######################################################################
 " Mappings
 "######################################################################
 " Spawn Tmux
-if system("type bpython > /dev/null && echo '1'")
-   nnoremap <Localleader>rf :call Spawn_tmux("bpython")<CR>
-else
-   nnoremap <Localleader>rf :call Spawn_tmux("python")<CR>
-endif
+let __init_file_py = expand("<sfile>:h:h") . '/vim-tmux/init_py.py'
+nnoremap <Localleader>rf :call Init_py(__init_file_py)<CR>
 
 " Kill Tmux
 nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
@@ -39,3 +52,7 @@ nnoremap <Localleader>aa :%y<CR>:call Send_tmux(g:tmux_session, @", "py")<CR>
 " Send Selections
 vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`<
 vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`>
+" Send Selection Hiding the code
+vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
+vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
+
