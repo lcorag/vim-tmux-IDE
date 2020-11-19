@@ -53,4 +53,4 @@ vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl
 vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`>
 
 " Define an help function
-nnoremap K yiw :call Send_tmux(g:tmux_session, "? " . @" . "\n", "jl")<CR>
+" nnoremap K yiw :call Send_tmux(g:tmux_session, "? " . @" . "\n", "jl")<CR>
