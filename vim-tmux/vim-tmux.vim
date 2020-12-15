@@ -74,9 +74,13 @@ function! Compile_tmux(tmux_session, fname, flags)
    else
       if (a:flags=="default")
          let flags = "-g -Wall -O2 -mtune=native"
+      else
+         let flags = a:flags
       endif
       if (a:fname=="default")
          let fname = expand("%:p")
+      else
+         let fname = a:fname
       endif
       let instruct = "gfortran " . flags . " " . fname
       silent execute "! tmux send-keys -t " . a:tmux_session . ' "' . instruct . '" Enter'
