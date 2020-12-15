@@ -36,5 +36,5 @@ nnoremap <Localleader>cc :call Compile_tmux(g:tmux_session, "default", "default"
 nnoremap <Localleader>ee :call Fort_exec()<CR>
 
 " Compile and execute with plplot
-nnoremap <Localleader>pp :call Compile_tmux(g:tmux_session, "default", "-g -Wall -O2 -mtune=native $(pkg-config --cflags --libs plplot-fortran")<CR>:call Fort_exec()<CR>
+nnoremap <Localleader>pp :call Compile_tmux(g:tmux_session, "default", "-g -Wall -O2 -mtune=native $(pkg-config --cflags --libs plplot-fortran)")<CR>:call Fort_exec()<CR>
 
