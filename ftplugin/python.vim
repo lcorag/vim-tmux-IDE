@@ -13,8 +13,10 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 " Function to initialize Python
 "######################################################################
 function! Init_py(init_file)
-   if system("type bpython > /dev/null && echo '1'")
-      call Spawn_tmux("bpython")
+   if system("type ipython > /dev/null && echo '1'")
+      call Spawn_tmux("ipython")
+   "if system("type bpython > /dev/null && echo '1'")
+   "   call Spawn_tmux("bpython")
    else
       call Spawn_tmux("python")
    endif
