@@ -1,6 +1,20 @@
 " Initialize g:tmux_session
 let g:tmux_session = "notset"
 
+if exists(g:TERMINAL)
+    let g:TERMINAL="alacritty"
+endif
+
+# define whether to use quoted or unquoted command to terminal
+let s:quoted_terminal=["termite"]
+let s:unquoted_terminal=["alacritty", "urxvt"]
+
+if count(s:quoted_terminal, g:TERMINAL) >= 1
+    let s:terminal_com_quote=1
+else
+    let s:terminal_com_quote=0
+endif
+
 " Create a function to call tmux terminal
 function! Spawn_tmux(filetype)
    silent let isthere = system("tmux list-sessions 2&> /dev/null | grep " . g:tmux_session . " | wc -l")
@@ -10,7 +24,11 @@ function! Spawn_tmux(filetype)
       " create a random number for session naming
       silent let randnum = system("echo -n $RANDOM")
       " Spawn tmux session
-      silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" & disown'
+      if s:terminal_com_quote
+          silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" & disown'
+      else
+          silent execute '!' . g:TERMINAL . ' -e tmux new-session -s ' . randnum . ' ' . a:filetype . ' & disown'
+      endif
       let g:tmux_session = randnum
       augroup vim_tmux
          au!
