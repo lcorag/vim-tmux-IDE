@@ -57,4 +57,3 @@ vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`>
 " Send Selection Hiding the code
 vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
 vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
-
