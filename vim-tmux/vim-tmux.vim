@@ -5,7 +5,7 @@ if exists(g:TERMINAL)
     let g:TERMINAL="alacritty"
 endif
 
-# define whether to use quoted or unquoted command to terminal
+" define whether to use quoted or unquoted command to terminal
 let s:quoted_terminal=["termite"]
 let s:unquoted_terminal=["alacritty", "urxvt"]
 
