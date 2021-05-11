@@ -49,7 +49,7 @@ nnoremap <Localleader>pe {y}:call Send_tmux(g:tmux_session, @", "py")<CR>``
 nnoremap <Localleader>pa }{y}:call Send_tmux(g:tmux_session, @", "py")<CR>}}{
 
 " Send everything
-nnoremap <Localleader>aa :%y<CR>:call Send_tmux(g:tmux_session, @", "py")<CR>
+nnoremap <Localleader>aa :%y<CR>:call Send_tmux_wrapped(g:tmux_session, @", "py")<CR>
 
 " Send Selections
 vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`<
