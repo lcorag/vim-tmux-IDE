@@ -37,4 +37,4 @@ nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 " Compile and execute
 nnoremap <Localleader>aa :call Go_exec()<CR>
 " Compile
-nnoremap <Localleader>cc :call Go_build<CR>
+nnoremap <Localleader>cc :call Go_build()<CR>
