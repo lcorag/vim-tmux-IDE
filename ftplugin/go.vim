@@ -13,13 +13,13 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 "######################################################################
 function! Go_exec()
    " Alias for calling executable
-   let execute = "go run " . expand("%:p") . " \n"
+   let executable = "go run " . expand("%:p") . " \n"
    silent call Send_tmux(g:tmux_session, executable, "")
 endfunction
 
 function! Go_build()
    " Alias for calling executable
-   let execute = "go build " . expand("%:p") . " \n"
+   let executable = "go build " . expand("%:p") . " \n"
    silent call Send_tmux(g:tmux_session, executable, "")
 endfunction
 
