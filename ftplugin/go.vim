@@ -11,7 +11,7 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 "######################################################################
 " Functions and utils for go
 "######################################################################
-function! Go_exec()
+function! Go_run()
    " Alias for calling executable
    let executable = "go run " . expand("%:p") . " \n"
    silent call Send_tmux(g:tmux_session, executable, "")
@@ -20,6 +20,12 @@ endfunction
 function! Go_build()
    " Alias for calling executable
    let executable = "go build " . expand("%:p") . " \n"
+   silent call Send_tmux(g:tmux_session, executable, "")
+endfunction
+
+function! Go_exec()
+   " Alias for calling executable
+   let executable = expand("%:p") . " \n"
    silent call Send_tmux(g:tmux_session, executable, "")
 endfunction
 
@@ -37,4 +43,6 @@ nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 " Compile and execute
 nnoremap <Localleader>aa :call Go_exec()<CR>
 " Compile
+nnoremap <Localleader>cc :call Go_build()<CR>
+" Execute
 nnoremap <Localleader>cc :call Go_build()<CR>
