@@ -39,18 +39,18 @@ nnoremap <Localleader>l yy:call Send_tmux(g:tmux_session, @", "jl")<CR>
 nnoremap <Localleader>d yy:call Send_tmux(g:tmux_session, @", "jl")<CR>j
 
 " Send paragraphs
-nnoremap <Localleader>pe {y}:call Send_tmux(g:tmux_session, @", "jl")<CR>``
-nnoremap <Localleader>pa }{y}:call Send_tmux(g:tmux_session, @", "jl")<CR>}}{
+nnoremap <Localleader>pe {y}:call Send_tmux_wrapped(g:tmux_session, @", "jl")<CR>``
+nnoremap <Localleader>pa }{y}:call Send_tmux_wrapped(g:tmux_session, @", "jl")<CR>}}{
 
 " Send everything
 nnoremap <Localleader>aa :%y<CR>:call Send_tmux(g:tmux_session, @", "jl")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "jl")<CR>`<
-vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "jl")<CR>`>
+vnoremap <Localleader>se y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`>
 " Send Selection Hiding the code
-vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`<
-vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`>
+"vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`<
+"vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "jl")<CR>`>
 
 " Define an help function
 " nnoremap K yiw :call Send_tmux(g:tmux_session, "? " . @" . "\n", "jl")<CR>

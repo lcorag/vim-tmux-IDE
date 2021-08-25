@@ -13,10 +13,8 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 " Function to initialize Python
 "######################################################################
 function! Init_py(init_file)
-   if system("type ipython > /dev/null && echo '1'")
-      call Spawn_tmux("ipython")
-   "if system("type bpython > /dev/null && echo '1'")
-   "   call Spawn_tmux("bpython")
+   if exists("g:vimtmux_python_interpreter")
+      call Spawn_tmux("g:vimtmux_python_interpreter")
    else
       call Spawn_tmux("python")
    endif
@@ -45,15 +43,16 @@ nnoremap <Localleader>k yy:call Send_tmux(g:tmux_session, substitute(@", "^\\s*"
 nnoremap <Localleader>s yy:call Send_tmux(g:tmux_session, substitute(@", "^\\s*", "", "g"), "py")<CR>j
 
 " Send paragraphs
-nnoremap <Localleader>pe {y}:call Send_tmux(g:tmux_session, @", "py")<CR>``
-nnoremap <Localleader>pa }{y}:call Send_tmux(g:tmux_session, @", "py")<CR>}}{
+nnoremap <Localleader>pe {y}:call Send_tmux_wrapped(g:tmux_session, @", "py")<CR>``
+nnoremap <Localleader>pa }{y}:call Send_tmux_wrapped(g:tmux_session, @", "py")<CR>}}{
 
 " Send everything
 nnoremap <Localleader>aa :%y<CR>:call Send_tmux_wrapped(g:tmux_session, @", "py")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`<
-vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`>
+vnoremap <Localleader>se y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
+
 " Send Selection Hiding the code
-vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
-vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
+"vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
+"vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>

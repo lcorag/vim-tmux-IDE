@@ -12,8 +12,8 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 " Function to initialize R
 "######################################################################
 function! Init_r(init_file)
-   if system("type radian > /dev/null && echo '1'")
-      call Spawn_tmux("radian")
+   if exists("g:vimtmux_r_intepreter")
+      call Spawn_tmux("g:vimtmux_r_intepreter")
    else
       call Spawn_tmux("R")
    endif
@@ -46,11 +46,11 @@ nnoremap <Localleader>pa }{y}:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR
 nnoremap <Localleader>aa :%y<CR>:call Send_tmux_wrapped(g:tmux_session, @", "r")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "r")<CR>`<
-vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "r")<CR>`>
+"vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "r")<CR>`<
+"vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "r")<CR>`>
 " Send Selection Hiding the code
-vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`<
-vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`>
+vnoremap <Localleader>se y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "r")<CR>`>
 
 " Remap = to <-
 inoremap ò <Space><-<Space>
