@@ -13,7 +13,7 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 "######################################################################
 function! Init_r(init_file)
    if exists("g:vimtmux_r_intepreter")
-      call Spawn_tmux("g:vimtmux_r_intepreter")
+      call Spawn_tmux(g:vimtmux_r_intepreter)
    else
       call Spawn_tmux("R")
    endif

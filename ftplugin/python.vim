@@ -14,7 +14,7 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 "######################################################################
 function! Init_py(init_file)
    if exists("g:vimtmux_python_interpreter")
-      call Spawn_tmux("g:vimtmux_python_interpreter")
+      call Spawn_tmux(g:vimtmux_python_interpreter)
    else
       call Spawn_tmux("python")
    endif
