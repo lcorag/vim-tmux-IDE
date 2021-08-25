@@ -72,6 +72,6 @@ Thus, it is not intended to provide:
 * The plug-in is in early stages, but provides a solid experience (tested over the last three years) in Julia, R and Python;
 
 * The followings are on the to do list:
-    [] Add more options for easier configuration;
-    [] Add vim-documentation;
-    [] Add more languages.
+    - [ ] Add more options for easier configuration;
+    - [ ] Add vim-documentation;
+    - [ ] Add more languages.
