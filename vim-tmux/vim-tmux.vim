@@ -74,13 +74,13 @@ function! Send_tmux(tmux_session, code, lang)
    endif
 endfunction
 
-" Send command wrapped (language specific, using function lu_vim_tmux_wrapper)
+" Send command wrapped (language specific, using function vim_tmux_wrapper__)
 function! Send_tmux_wrapped(tmux_session, code, lang)
    if (g:tmux_session == 'notset')
       echo "No Tmux Session linked: start one with <Localleader>rf"
    else
       call CodePrepare(a:code, a:lang)
-      silent execute "! tmux send-keys -t " . a:tmux_session . " 'lu_vim_tmux_wrapper()' Enter"
+      silent execute "! tmux send-keys -t " . a:tmux_session . " 'vim_tmux_wrapper__()' Enter"
       redraw!
    endif
 endfunction
