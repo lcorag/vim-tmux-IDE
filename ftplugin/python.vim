@@ -50,9 +50,8 @@ nnoremap <Localleader>pa }{y}:call Send_tmux_wrapped(g:tmux_session, @", "py")<C
 nnoremap <Localleader>aa :%y<CR>:call Send_tmux_wrapped(g:tmux_session, @", "py")<CR>
 
 " Send Selections
-vnoremap <Localleader>se y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
-vnoremap <Localleader>sa y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
-
+vnoremap <Localleader>se y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`<
+vnoremap <Localleader>sa y:call Send_tmux(g:tmux_session, @" . "\n", "py")<CR>`>
 " Send Selection Hiding the code
-"vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
-"vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
+vnoremap <Localleader>sh y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`<
+vnoremap <Localleader>sH y:call Send_tmux_wrapped(g:tmux_session, @" . "\n", "py")<CR>`>
