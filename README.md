@@ -43,6 +43,8 @@ You can change mappings there should you like.
 | \<localleader\>pa| send paragraph and go to next paragraph |
 | \<localleader\>se| send visual selection |
 | \<localleader\>sa| send visual selection and go to next paragraph |
+| \<localleader\>sh| send visual selection (hide code chunks)|
+| \<localleader\>sH| send visual selection and go to next paragraph (hide code chunks) |
 
 ## Configuration
 Currently, you can configure the interpreter used for python and R.
