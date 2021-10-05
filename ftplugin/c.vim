@@ -13,7 +13,8 @@ execute 'source ' . expand("<sfile>:h:h") . '/vim-tmux/vim-tmux.vim'
 "######################################################################
 function! C_exec()
    " Alias for calling executable
-   let executable = expand("%:p:h") . "/a.out" . " \n"
+   "let executable = expand("%:p:h") . "/a.out" . " \n"
+   let executable = "./a.out" . " \n"
    silent call Send_tmux(g:tmux_session, executable, "")
 endfunction
 
@@ -29,8 +30,8 @@ nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 
 " CURRENT FILE
 " Compile and execute
-nnoremap <Localleader>aa :call Compile_tmux(g:tmux_session, "default", "default")<CR>:call C_exec()<CR>
+nnoremap <Localleader>aa :call Compile_tmux(g:tmux_session, expand("%h"), "default")<CR>:call C_exec()<CR>
 " Compile
-nnoremap <Localleader>cc :call Compile_tmux(g:tmux_session, "default", "default")<CR>
+nnoremap <Localleader>cc :call Compile_tmux(g:tmux_session, expand("%h"), "default")<CR>
 " Execute
 nnoremap <Localleader>ee :call C_exec()<CR>
