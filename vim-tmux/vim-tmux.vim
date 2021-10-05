@@ -86,7 +86,7 @@ function! Send_tmux_wrapped(tmux_session, code, lang)
 endfunction
 
 " Compile current file (for fortran)
-function! Compile_tmux(tmux_session, fname, flags)
+function! Compile_tmux(tmux_session, fname, flags, compiler)
    if (g:tmux_session == 'notset')
       echo "No Tmux Session linked: start one with <Localleader>rf"
    else
@@ -100,7 +100,7 @@ function! Compile_tmux(tmux_session, fname, flags)
       else
          let fname = a:fname
       endif
-      let instruct = "gfortran " . flags . " " . fname
+      let instruct = a:compiler . " " . flags . " " . fname
       silent execute "! tmux send-keys -t " . a:tmux_session . ' "' . instruct . '" Enter'
       redraw!
    endif

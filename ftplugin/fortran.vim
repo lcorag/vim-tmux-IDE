@@ -29,9 +29,9 @@ nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
 
 " CURRENT FILE
 " Compile and execute
-nnoremap <Localleader>aa :call Compile_tmux(g:tmux_session, "default", "default")<CR>:call Fort_exec()<CR>
+nnoremap <Localleader>aa :call Compile_tmux(g:tmux_session, "default", "default", "gfortran")<CR>:call Fort_exec()<CR>
 " Compile
-nnoremap <Localleader>cc :call Compile_tmux(g:tmux_session, "default", "default")<CR>
+nnoremap <Localleader>cc :call Compile_tmux(g:tmux_session, "default", "default", "gfortran")<CR>
 " Execute
 nnoremap <Localleader>ee :call Fort_exec()<CR>
 
