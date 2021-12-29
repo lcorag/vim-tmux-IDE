@@ -7,7 +7,7 @@ endif
 
 " define whether to use quoted or unquoted command to terminal
 let s:quoted_terminal=["termite"]
-let s:unquoted_terminal=["alacritty", "urxvt"]
+let s:unquoted_terminal=["alacritty", "urxvt", "foot"]
 
 if count(s:quoted_terminal, g:TERMINAL) >= 1
     let s:terminal_com_quote=1
