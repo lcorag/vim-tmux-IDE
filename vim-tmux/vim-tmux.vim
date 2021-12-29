@@ -22,7 +22,7 @@ function! Spawn_tmux(filetype)
       echom "Tmux session already established.\nSession: " . g:tmux_session
    else
       " create a random number for session naming
-      silent let randnum = system("echo -n $RANDOM")
+      silent let randnum = rand()
       " Spawn tmux session
       if s:terminal_com_quote
           silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" & disown'
