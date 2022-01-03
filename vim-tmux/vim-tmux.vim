@@ -25,9 +25,9 @@ function! Spawn_tmux(filetype)
       silent let randnum = rand()
       " Spawn tmux session
       if s:terminal_com_quote
-          silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" & disown'
+          silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" &'
       else
-          silent execute '!' . g:TERMINAL . ' -e tmux new-session -s ' . randnum . ' ' . a:filetype . ' & disown'
+          silent execute '!' . g:TERMINAL . ' -e tmux new-session -s ' . randnum . ' ' . a:filetype . ' &'
       endif
       let g:tmux_session = randnum
       augroup vim_tmux
