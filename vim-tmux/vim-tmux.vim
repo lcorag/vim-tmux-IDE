@@ -4,9 +4,12 @@ let g:tmux_session = "notset"
 if exists(g:TERMINAL)
     let g:TERMINAL="alacritty"
 endif
+if exists(g:TERMRUN)
+    let g:TERMRUN="alacritty -e "
+endif
 
 " define whether to use quoted or unquoted command to terminal
-let s:quoted_terminal=["termite"]
+let s:quoted_terminal=["termite", "gnome-terminal"]
 let s:unquoted_terminal=["alacritty", "urxvt", "foot"]
 
 if count(s:quoted_terminal, g:TERMINAL) >= 1
@@ -25,9 +28,9 @@ function! Spawn_tmux(filetype)
       silent let randnum = rand()
       " Spawn tmux session
       if s:terminal_com_quote
-          silent execute '!' . g:TERMINAL . ' -e "tmux new-session -s ' . randnum . ' ' . a:filetype . '" &'
+          silent execute '!' . g:TERMRUN . ' "tmux new-session -s ' . randnum . ' ' . a:filetype . '" &'
       else
-          silent execute '!' . g:TERMINAL . ' -e tmux new-session -s ' . randnum . ' ' . a:filetype . ' &'
+          silent execute '!' . g:TERMRUN . ' tmux new-session -s ' . randnum . ' ' . a:filetype . ' &'
       endif
       let g:tmux_session = randnum
       augroup vim_tmux
