@@ -1,4 +1,4 @@
-# Provide default terminal
+" Provide default terminal
 if !exists("g:TERMINAL")
     let g:TERMINAL="alacritty"
 endif
