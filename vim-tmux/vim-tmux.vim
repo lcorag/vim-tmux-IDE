@@ -1,6 +1,4 @@
-" Initialize g:tmux_session
-let g:tmux_session = "notset"
-
+# Provide default terminal
 if !exists("g:TERMINAL")
     let g:TERMINAL="alacritty"
 endif
@@ -20,7 +18,6 @@ endif
 
 " Create a function to call tmux terminal
 function! Spawn_tmux(filetype)
-   silent let isthere = system("tmux list-sessions 2&> /dev/null | grep " . g:tmux_session . " | wc -l")
    if exists("g:tmux_session")
       echom "Tmux session already established.\nSession: " . g:tmux_session
    else
