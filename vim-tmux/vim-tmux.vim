@@ -1,10 +1,10 @@
 " Initialize g:tmux_session
 let g:tmux_session = "notset"
 
-if exists(g:TERMINAL)
+if !exists("g:TERMINAL")
     let g:TERMINAL="alacritty"
 endif
-if exists(g:TERMRUN)
+if !exists("g:TERMRUN")
     let g:TERMRUN="alacritty -e "
 endif
 
@@ -21,7 +21,7 @@ endif
 " Create a function to call tmux terminal
 function! Spawn_tmux(filetype)
    silent let isthere = system("tmux list-sessions 2&> /dev/null | grep " . g:tmux_session . " | wc -l")
-   if isthere
+   if exists("g:tmux_session")
       echom "Tmux session already established.\nSession: " . g:tmux_session
    else
       " create a random number for session naming
