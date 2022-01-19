@@ -30,7 +30,7 @@ function! Spawn_tmux(filetype)
       if s:terminal_com_quote
           silent execute '!' . g:TERMRUN . ' "tmux new-session -s ' . randnum . ' ' . a:filetype . '" &'
       else
-          silent execute '!' . g:TERMRUN . ' tmux new-session -s ' . randnum . ' ' . a:filetype . ' &'
+          silent execute '!' . g:TERMRUN . ' tmux new-session -s ' . randnum . ' ' . a:filetype 
       endif
       let g:tmux_session = randnum
       augroup vim_tmux
