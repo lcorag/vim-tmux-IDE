@@ -38,12 +38,12 @@ function! Spawn_tmux(filetype)
 endfunction
 
 "Kill Tmux
-function! Kill_tmux(tmux_session)
-   if (g:tmux_session == 'notset')
-      echo "No Tmux Session to kill (start one with <Localleader>rf)"
+function! Kill_tmux()
+   if exists("g:tmux_session")
+      silent execute '! tmux kill-session -t ' . g:tmux_session
+      unlet g:tmux_session
    else
-      silent execute '! tmux kill-session -t ' . a:tmux_session
-      let g:tmux_session = "notset"
+      echo "No Tmux Session to kill (start one with <Localleader>rf)"
    endif
 endfunction
 

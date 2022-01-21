@@ -37,7 +37,7 @@ endfunction
 nnoremap <Localleader>rf :call Spawn_tmux("")<CR>
 
 " Kill Tmux
-nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
+nnoremap <Localleader>rq :call Kill_tmux()<CR>
 
 " CURRENT FILE
 " Compile and execute

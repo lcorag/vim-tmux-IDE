@@ -32,7 +32,7 @@ endfunction
 let __init_file_jl = expand("<sfile>:h:h") . '/vim-tmux/init_jl.jl'
 nnoremap <Localleader>rf :call Init_jl(__init_file_jl)<CR>
 " Kill Tmux
-nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
+nnoremap <Localleader>rq :call Kill_tmux()<CR>
 
 " Send lines
 nnoremap <Localleader>l yy:call Send_tmux(g:tmux_session, @", "jl")<CR>

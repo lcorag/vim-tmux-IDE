@@ -32,7 +32,7 @@ let __init_file_r = expand("<sfile>:h:h") . '/vim-tmux/init_r.R'
 nnoremap <Localleader>rf :call Init_r(__init_file_r)<CR>
 
 " Kill Tmux
-nnoremap <Localleader>rq :call Kill_tmux(g:tmux_session)<CR>
+nnoremap <Localleader>rq :call Kill_tmux()<CR>
 
 " Send lines
 nnoremap <Localleader>l yy:call Send_tmux(g:tmux_session, @", "r")<CR>
